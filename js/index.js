@@ -19,19 +19,37 @@ function getValueForm() {
     if (check && id == "tknv") {
       isValid &= checkLengthMatk(value, errorField, 4, 6);
     }
+    if (check && id == "name") {
+      isValid &= isNameString(value, errorField);
+    }
     if (check && id == "email") {
       isValid &= checkEmailValue(value, errorField);
     }
-    // if()
+    if (check && id == "luongCB") {
+      isValid &= checkLuongCB(value, errorField, 1000000, 20000000);
+    }
+    if (check && id == "gioLam") {
+      isValid &= checkGioLam(value, errorField, 80, 200);
+    }
+    if (check && id == "chucvu") {
+      isValid &= checkChucVu(value, errorField);
+    }
   }
   // console.log(nhanVien);
   if (isValid) {
     return nhanVien;
   }
 }
+// reset span
+function resetSpan() {
+  let errorField = parent.querySelector("#formNhanVien span");
+  errorField = "";
+}
 
+// thêm nhân viên
 document.getElementById("formNhanVien").onsubmit = function (event) {
   event.preventDefault();
+
   let nhanVien = getValueForm();
   // console.log(NhanVien);
   if (!nhanVien) {
@@ -45,6 +63,7 @@ document.getElementById("formNhanVien").onsubmit = function (event) {
 function renderSaveReset() {
   renderArrNhanVien();
   saveLocalStorage();
+  resetSpan();
   document.getElementById("formNhanVien").reset();
 }
 //Hiển thị lên giao diện
@@ -139,3 +158,12 @@ function updateNhanVien() {
     renderSaveReset();
   }
 }
+
+document.getElementById("btnDong").onclick = () => {
+  document.getElementById("formNhanVien").reset();
+};
+document.getElementById("btnThemNV").onclick = () => {
+  document.getElementById("formNhanVien").reset();
+  resetSpan();
+  document.getElementById("tknv").readOnly = false;
+};
