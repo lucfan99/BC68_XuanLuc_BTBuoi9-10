@@ -18,6 +18,7 @@ function checkLengthMatk(value, errorField, min, max) {
     return false;
   }
 }
+// Lương
 function checkLuongCB(value, errorField, min, max) {
   if (min <= value && value <= max) {
     errorField.innerHTML = "";
@@ -83,5 +84,36 @@ function isDate(value, errorField) {
     n;
   } else {
     errorField.innerHTML = "Vui lòng nhập đúng định dạng MM/DD/YYYY";
+  }
+}
+// Mật khẩu
+// function checkPassword(value, errorField) {
+//   if (value.length < 6 || value.length > 10) {
+//     return false;
+//   }
+//   let hasUpperCase = false;
+//   let hasLowerCase = false;
+//   let hasDigit = false;
+//   for (let i = 0; i < value.lenght; i++) {
+//     let char = value[i];
+//     if (char >= "a" && char <= "z") {
+//       hasLowerCase = true;
+//     } else if (char >= "A" && char <= "Z") {
+//       hasUpperCase = true;
+//     } else if (char >= "0" && char <= "9") {
+//       hasDigit = true;
+//     }
+//   }
+//   return hasDigit && hasLowerCase && hasUpperCase;
+// }
+function checkPassword(value, errorField) {
+  let regexPass = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6-10,}/;
+  let isValid = regexPass.test(value);
+  if (isValid) {
+    errorField.innerHTML = "";
+    return true;
+  } else {
+    errorField.innerHTML = "Vui lòng nhập đúng định dạng password !!";
+    return false;
   }
 }

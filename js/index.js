@@ -22,6 +22,9 @@ function getValueForm() {
     if (check && id == "name") {
       isValid &= isNameString(value, errorField);
     }
+    if (check && id == "password") {
+      isValid &= checkPassword(value, errorField);
+    }
     if (check && id == "email") {
       isValid &= checkEmailValue(value, errorField);
     }
@@ -41,17 +44,17 @@ function getValueForm() {
   }
 }
 // reset span
-function resetSpan() {
-  let errorField = parent.querySelector("#formNhanVien span");
-  errorField = "";
-}
+// function resetSpan() {
+//   let errorField = parent.querySelector("#formNhanVien span");
+//   errorField = "";
+// }
 
 // thêm nhân viên
 document.getElementById("formNhanVien").onsubmit = function (event) {
   event.preventDefault();
 
   let nhanVien = getValueForm();
-  // console.log(NhanVien);
+  console.log(NhanVien);
   if (!nhanVien) {
     return;
   }
@@ -60,10 +63,11 @@ document.getElementById("formNhanVien").onsubmit = function (event) {
   renderSaveReset();
   console.log(arrNhanVien);
 };
+
 function renderSaveReset() {
   renderArrNhanVien();
   saveLocalStorage();
-  resetSpan();
+  // resetSpan();
   document.getElementById("formNhanVien").reset();
 }
 //Hiển thị lên giao diện
@@ -158,12 +162,30 @@ function updateNhanVien() {
     renderSaveReset();
   }
 }
+// search loai NV
+function searchLoaiNV(event) {
+  let newKeyWord = removeVietnameseTones(
+    event.target.value.toLowerCase().trim()
+  );
+  let arrNVFilter = arrNhanVien.filter((item) => {
+    console.log(item);
+    let nhanVien = new NhanVien();
+    Object.assign(nhanVien, item);
+    let loai = removeVietnameseTones(
+      nhanVien.loaiNhanVien().toLowerCase().trim()
+    );
+    return loai.includes(newKeyWord);
+  });
+  console.log(arrNVFilter);
+  renderArrNhanVien(arrNVFilter);
+}
+document.getElementById("searchName").oninput = searchLoaiNV;
 
 document.getElementById("btnDong").onclick = () => {
   document.getElementById("formNhanVien").reset();
 };
 document.getElementById("btnThemNV").onclick = () => {
-  document.getElementById("formNhanVien").reset();
-  resetSpan();
+  // document.getElementById("formNhanVien").reset();
+  // resetSpan();
   document.getElementById("tknv").readOnly = false;
 };

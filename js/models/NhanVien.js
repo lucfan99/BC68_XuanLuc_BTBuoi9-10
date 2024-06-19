@@ -24,13 +24,13 @@ class NhanVien {
   loaiNhanVien = function () {
     let loaiNV;
     if (this.gioLam * 1 >= 192) {
-      loaiNV = "Nhân viên xuất sắc";
+      loaiNV = "Xuất sắc";
     } else if (this.gioLam * 1 >= 176 && this.gioLam * 1 < 192) {
-      loaiNV = "Nhân viên giỏi";
+      loaiNV = "Giỏi";
     } else if (this.gioLam * 1 >= 160 && this.gioLam * 1 < 176) {
-      loaiNV = "Nhân viên khá";
+      loaiNV = "Khá";
     } else {
-      loaiNV = "Nhân viên trung bình";
+      loaiNV = " Trung bình";
     }
     return loaiNV;
   };
