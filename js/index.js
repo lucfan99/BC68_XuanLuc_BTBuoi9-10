@@ -23,7 +23,7 @@ function getValueForm() {
       isValid &= isNameString(value, errorField);
     }
     if (check && id == "password") {
-      isValid &= checkPassword(value, errorField);
+      isValid &= checkPassword(value, errorField, 6, 10);
     }
     if (check && id == "email") {
       isValid &= checkEmailValue(value, errorField);

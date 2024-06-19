@@ -24,7 +24,7 @@ function checkLuongCB(value, errorField, min, max) {
     errorField.innerHTML = "";
     return true;
   } else {
-    errorField.innerHTML = `Lương trong khoảng từ ${min} đến ${max}`;
+    errorField.innerHTML = `Lương trong khoảng từ 1tr đến 20tr`;
     return false;
   }
 }
@@ -62,12 +62,13 @@ function checkChucVu(value, errorField) {
 }
 // name
 function isNameString(value, errorField) {
-  let isValid = typeof value;
-  if (isValid == "string") {
+  let nameRegex = /^[a-zA-Z\-]+$/;
+  let isValid = nameRegex.test(value);
+  if (isValid) {
     errorField.innerHTML = "";
     return true;
   } else {
-    errorField.innerHTML = "Tên vui lòng không nhập số ";
+    errorField.innerHTML = `Vui lòng nhập bằng chữ !!`;
     return false;
   }
 }
@@ -106,14 +107,15 @@ function isDate(value, errorField) {
 //   }
 //   return hasDigit && hasLowerCase && hasUpperCase;
 // }
-function checkPassword(value, errorField) {
-  let regexPass = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6-10,}/;
+function checkPassword(value, errorField, min, max) {
+  let regexPass =
+    /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*))/;
   let isValid = regexPass.test(value);
-  if (isValid) {
+  if (isValid && min <= value.length && value.length <= max) {
     errorField.innerHTML = "";
     return true;
   } else {
-    errorField.innerHTML = "Vui lòng nhập đúng định dạng password !!";
+    errorField.innerHTML = `Vui lòng nhập pass trong khoảng từ ${min} đến ${max}`;
     return false;
   }
 }
