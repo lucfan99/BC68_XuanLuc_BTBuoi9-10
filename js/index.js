@@ -62,6 +62,8 @@ document.getElementById("formNhanVien").onsubmit = function (event) {
   arrNhanVien.push(nhanVien);
   renderSaveReset();
   console.log(arrNhanVien);
+
+  document.getElementById("searchName").reset();
 };
 
 function renderSaveReset() {
